@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+	
+	<mvc:annotation-driven />
+	
+	<sec:global-method-security pre-post-annotations="enabled" />
+
+
+	<!-- Specifying base package of the Components like Controller, Service, 
+		DAO -->
+	<context:component-scan base-package="org.idchavan" />
+
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	<tx:annotation-driven transaction-manager="hibernateTransactionManager" />
+
+	<!-- Getting Database properties -->
+	<context:property-placeholder location="classpath:application.properties,classpath:appFormatter.properties" />
+
+	<!-- Specifying the Resource location to load JS, CSS, Images etc -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<mvc:resources mapping="/webcontent/**" location="/webcontent/" />
+	
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="viewResolver"> 
+	 <property name="viewClass">
+	 	<value>
+	    	 org.springframework.web.servlet.view.tiles3.TilesView
+	 	</value>
+	 </property>
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer" id="tilesConfigurer">
+	 <property name="definitions">
+	    <list>
+	     <value>/WEB-INF/tiles/tiles.xml</value>
+	    </list>
+	 </property> 
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<!-- DataSource -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${database.driverClassName}" />
+		<property name="url" value="${database.url}" />
+		<property name="username" value="${database.username}" />
+		<property name="password" value="${database.password}" />
+	</bean>
+
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.format_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.show_sql">${hibernate.format_sql}</prop>
+			</props>
+		</property>
+		<property name="packagesToScan" value="org.idchavan.entity"></property>
+		<!-- <property name="annotatedClasses" >
+			<list>
+				<value>org.idchavan.entity.SanctionOrder</value>
+				<value>org.idchavan.entity.SanctionOrderDetail</value>
+			</list>
+		</property>
+		 -->
+	</bean>
+
+	<bean class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+		id="hibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message\messages</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+		<!-- setting maximum upload size 
+		<property name="maxUploadSize" value="100000"/>-->
+	</bean>
+</beans>	

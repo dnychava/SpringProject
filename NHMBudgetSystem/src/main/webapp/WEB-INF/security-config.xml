@@ -1,0 +1,44 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+	<http auto-config="true">
+	     <form-login
+			  login-page="/login"
+			  default-target-url="/home"
+			  authentication-failure-url="/loginFailed"
+			  username-parameter="username"
+			  password-parameter="password"
+			  always-use-default-target="true"/>
+		 <!-- <logout logout-success-url="/" logout-url="/j_spring_security_logout" /> -->
+		 <csrf disabled="true" />	 
+    </http>
+    <beans:bean id="bcrypt" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider>
+            <password-encoder ref="bcrypt"/>
+            <jdbc-user-service id="jdbcUserService" data-source-ref="dataSource"
+                users-by-username-query="
+                select username, password, isActive as enabled 
+                from users where username=?" 
+                authorities-by-username-query="
+                select u.username, r.role from users u, roles r, user_roles ur 
+                where u.id=ur.user_id and r.id=ur.role_id and u.username=?" 
+            />
+        </authentication-provider>
+    </authentication-manager>
+  
+    <!-- <authentication-manager >
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="admin" authorities="ROLE_USER" />
+                
+            </user-service>
+        </authentication-provider>
+    </authentication-manager> -->
+     
+</beans:beans>

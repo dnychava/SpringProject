@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+.modal-lg {
+    width: 80% !important;
+}
+
+.modal-body {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.error {
+	color: red;
+	font-weight: bold;
+}
+
+/* This size for DataTable */
+th { font-size: 13px; }
+td { font-size: 13px; }
+

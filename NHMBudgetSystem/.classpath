@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/servlet/jsp/jsp-api/2.1/jsp-api-2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/4.0.6.RELEASE/spring-core-4.0.6.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-context/4.0.6.RELEASE/spring-context-4.0.6.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-aop/4.0.6.RELEASE/spring-aop-4.0.6.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-beans/4.0.6.RELEASE/spring-beans-4.0.6.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-expression/4.0.6.RELEASE/spring-expression-4.0.6.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/4.0.6.RELEASE/spring-tx-4.0.6.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-orm/4.0.6.RELEASE/spring-orm-4.0.6.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-jdbc/4.0.6.RELEASE/spring-jdbc-4.0.6.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-core/4.3.6.Final/hibernate-core-4.3.6.Final.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/jboss/logging/jboss-logging/3.1.3.GA/jboss-logging-3.1.3.GA.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/jboss/logging/jboss-logging-annotations/1.2.0.Beta1/jboss-logging-annotations-1.2.0.Beta1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.0.0.Final/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/common/hibernate-commons-annotations/4.0.5.Final/hibernate-commons-annotations-4.0.5.Final.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar"/>
+	<classpathentry kind="var" path="M2_REPO/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/jboss/jandex/1.1.0.Final/jandex-1.1.0.Final.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/microsoft/sqlserver/sqljdbc4/4.0/sqljdbc4-4.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/jstl/jstl/1.2/jstl-1.2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/axis-ant.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/axis.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/chartengineapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/chartexamplescoreapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/chartitemapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/com.ibm.icu_56.1.0.v201601250100.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/com.lowagie.text_2.1.7.v201004222200.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-cli-1.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/coreapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/crosstabcoreapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/dataadapterapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/dataaggregationapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/dataextraction.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/dteapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/emitterconfig.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/engineapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/flute.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javax.wsdl_1.5.1.v201012040544.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javax.xml_1.3.4.v201005080400.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javax.xml.stream_1.0.1.v201004272200.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/js.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jsp.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/modelapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/modelodaapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/net.sourceforge.lpg.lpgjavaruntime_1.1.0.v201004271650.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/odaconnectivity.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/odadesignapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.bridge_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.css_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.dom_1.6.1.v201505192100.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.dom.svg_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.ext.awt_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.parser_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.pdf_1.6.0.v201105071520.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.svggen_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.transcoder_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.util_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.util.gui_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.batik.xml_1.6.0.v201011041432.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.commons.codec_1.6.0.v201305230611.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.commons.logging_1.1.1.v201101211721.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.derby_10.11.1.1_v201605202053.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.lucene.core_3.5.0.v20120725-1805.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.poi_3.9.0.v201405241750.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.xerces_2.9.0.v201101211617.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.xml.resolver_1.2.0.v201005080400.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.xml.serializer_2.7.1.v201005080400.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.birt.axis.overlay_4.6.0.v201606072122.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.birt.runtime_4.6.0-20160607.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.core.contenttype_3.5.100.v20160418-1621.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.core.expressions_3.5.100.v20160418-1621.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.core.filesystem_1.6.0.v20160503-1608.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.core.jobs_3.8.0.v20160509-0411.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.core.resources_3.11.0.v20160503-1608.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.core.runtime_3.12.0.v20160606-1342.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity_1.13.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity.apache.derby_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity.apache.derby.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity.console.profile_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity.db.generic_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity.dbdefinition.genericJDBC_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity.oda_3.5.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity.oda.consumer_3.3.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity.oda.design_3.4.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity.oda.flatfile_3.2.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity.oda.profile_3.3.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.connectivity.sqm.core_1.3.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.hsqldb_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.hsqldb.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.ibm_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.ibm.db2_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.ibm.db2.iseries_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.ibm.db2.iseries.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.ibm.db2.luw_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.ibm.db2.luw.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.ibm.db2.zseries_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.ibm.db2.zseries.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.ibm.informix_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.ibm.informix.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.msft.sqlserver_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.msft.sqlserver.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.mysql_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.mysql.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.oda.ws_1.3.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.oda.xml_1.3.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.oracle_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.oracle.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.postgresql_1.2.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.postgresql.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.sap.maxdb_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.enablement.sap.maxdb.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.modelbase.dbdefinition_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.modelbase.derby_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.modelbase.sql_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.modelbase.sql.query_1.2.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.sqltools.data.core_1.3.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.sqltools.parsers.sql_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.sqltools.parsers.sql.lexer_1.1.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.sqltools.parsers.sql.query_1.3.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.datatools.sqltools.result_1.2.0.201603142002.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.emf.common_2.12.0.v20160420-0247.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.emf.ecore_2.12.0.v20160420-0247.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.emf.ecore.change_2.11.0.v20160420-0247.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.emf.ecore.xmi_2.12.0.v20160420-0247.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.equinox.app_1.3.400.v20150715-1528.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.equinox.common_3.8.0.v20160509-1230.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.equinox.preferences_3.6.0.v20160120-1756.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.equinox.registry_3.6.100.v20160223-2218.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.help_3.7.0.v20160602-1307.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.orbit.mongodb_2.10.1.v20130422-1135.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.osgi_3.11.0.v20160603-1336.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.osgi.services_3.5.100.v20160504-1419.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.eclipse.update.configurator_3.3.400.v20160506-0750.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.mozilla.javascript_1.7.5.v201504281450.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.w3c.css.sac_1.3.1.v200903091627.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.w3c.dom.events_3.0.0.draft20060413_v201105210656.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.w3c.dom.smil_1.0.1.v200903091627.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.w3c.dom.svg_1.1.0.v201011041433.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/saaj.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/scriptapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/sqljdbc4-4.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/viewservlets.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAXSONE"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

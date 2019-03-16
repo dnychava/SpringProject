@@ -26,7 +26,7 @@ public class MasterData {
 	
 	private String[] share = { "State", "Central"};
 	
-	private String[] seasonTypes = { "Main", "Mansoon", "Winter", "Summer"};
+	private String[] seasonTypes = { "Main", "Mansoon", "Winter", "Summer", "RE"};
 	
 	private Map<String,String> docFormatTye = new LinkedHashMap<String, String>();
 	
@@ -52,7 +52,11 @@ public class MasterData {
 	}
 
 	public List<String> getFinalcialYearList() {
-		return new DateUtil().getFinalcialYear(2010, 2030);
+		return getFinalcialYearList(false);
+	}
+	
+	public List<String> getFinalcialYearList(boolean isAddAll) {
+		return new DateUtil().getFinalcialYear(AppConstants.FROM_YEAR, AppConstants.TO_YEAR, isAddAll);
 	}
 
 	public List<String> getProgramList() {

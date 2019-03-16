@@ -5,18 +5,32 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.idchavan.common.AppConstants;
 import org.springframework.stereotype.Component;
 
+/**
+ * 
+ * 
+ * @author Dnyaneshwar Chavan
+ * @since 16-Mar-2018
+ */
 @Component
 public class DateUtil {
   
 	public List<String> getFinalcialYear(int fromYear, int toYear) {
+        return getFinalcialYear(fromYear, toYear, false);
+    }
+	
+	public List<String> getFinalcialYear(int fromYear, int toYear, boolean isAddAll) {
 
-        List<String> finalcialYears = new ArrayList<String>(); 
         if (("" + fromYear).length() < 4) {
             throw new IllegalArgumentException("The value shoud be 4 digit of fromYear. Eg. 2017. The value is given ["+fromYear+"]");
         } else if (("" + toYear).length() < 4) {
             throw new IllegalArgumentException("The value shoud be 4 digit of toYear. Eg. 2017. The value is given ["+toYear+"]");
+        }
+        List<String> finalcialYears = new ArrayList<String>();
+        if (isAddAll){
+        	finalcialYears.add(AppConstants.ALL);
         }
         
         Calendar fromYearCal = Calendar.getInstance();

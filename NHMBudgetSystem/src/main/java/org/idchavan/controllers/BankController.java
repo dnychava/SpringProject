@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -21,7 +21,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.idchavan.DTO.SanctionOrderDetailViewDTO;
 import org.idchavan.bo.BankBO;
@@ -40,7 +39,6 @@ import org.idchavan.entity.SanctionOrderDetailEntity;
 import org.idchavan.filterDTO.OrderDetailFilterDTO;
 import org.idchavan.validators.BankValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -74,6 +72,8 @@ public class BankController extends AbstractCommonController {
 
 	@Autowired
 	private OrderDetailFilterDTO sanOrdDtlFilter;
+
+	private final BigDecimal ONE_LAKH = new BigDecimal(100000);
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -114,7 +114,7 @@ public class BankController extends AbstractCommonController {
 		for (GrSanctionOrderEntity grSanOrdEntity : grSanOrdList) {
 			grSanOrdRids.add(grSanOrdEntity.getRid());
 		}
-		if(grSanOrdRids.isEmpty()){
+		if (grSanOrdRids.isEmpty()) {
 			grSanOrdRids.add("");
 		}
 		sanOrdDtlFilter.setRidListForDTLTbl(grSanOrdRids);
@@ -125,35 +125,46 @@ public class BankController extends AbstractCommonController {
 
 			BankDetailEntity bankDtl = bankBO.getAllBankDetails(grSanOrdDtl.getRid(), shareTypeEnum.getName());
 
-			SanctionOrderDetailViewDTO sanOrdDtlViewDTO = new SanctionOrderDetailViewDTO();
-			sanOrdDtlViewDTO.setRid(grSanOrdDtl.getRid());
-			sanOrdDtlViewDTO.setOrderProgramName(grSanOrdDtl.getOrderProgramName());
-			sanOrdDtlViewDTO.setOrderDate(grSanOrdDtl.getOrderDate());
-			sanOrdDtlViewDTO.setOrderNumber(grSanOrdDtl.getOrderNumber());
-			sanOrdDtlViewDTO.setOrderCategory(grSanOrdDtl.getOrderCategory());
-			compareGrSanOrdDtlToBankDtl(grSanOrdDtl, bankDtl, sanOrdDtlViewDTO);
-			sanOrdDtlViewList.add(sanOrdDtlViewDTO);
+			compareGrSanOrdDtlToBankDtl(grSanOrdDtl, bankDtl, sanOrdDtlViewList);
+
 		}
 		model.addAttribute("sanOrdDtlViewList", sanOrdDtlViewList);
 		return "popupGrSanctionOrderDetails";
 	}
 
 	public void compareGrSanOrdDtlToBankDtl(GrSanctionOrderDetailEntity grSanOrdDtl, BankDetailEntity bankDtl,
-			SanctionOrderDetailViewDTO sanOrdDtlViewDTO) {
+			List<SanctionOrderDetailViewDTO> sanOrdDtlViewList) {
 
+		SanctionOrderDetailViewDTO sanOrdDtlViewDTO = new SanctionOrderDetailViewDTO();
+		BigDecimal calGrOrderAmt = grSanOrdDtl.getOrderAmtInLakh().multiply(ONE_LAKH, MathContext.UNLIMITED);
 		if (bankDtl != null) {
-			if (grSanOrdDtl.getOrderAmt().compareTo(bankDtl.getAmt()) == 0) {
+			// if (grSanOrdDtl.getOrderAmt().compareTo(bankDtl.getAmt()) == 0) {
+			if (grSanOrdDtl.getOrderAmtInLakh().compareTo(bankDtl.getAmtInLakh()) == 0) {
 				sanOrdDtlViewDTO.setRadioBtn(false);
-				sanOrdDtlViewDTO.setOrderAmt(grSanOrdDtl.getOrderAmt());
+				sanOrdDtlViewDTO.setOrderAmt(calGrOrderAmt);
 				sanOrdDtlViewDTO.setOrderAmtInLakh(grSanOrdDtl.getOrderAmtInLakh());
-			} else if (grSanOrdDtl.getOrderAmt().compareTo(bankDtl.getAmt()) == 1) {
-				sanOrdDtlViewDTO.setOrderAmt(grSanOrdDtl.getOrderAmt().subtract(bankDtl.getAmt()));
+			} else if (grSanOrdDtl.getOrderAmtInLakh().compareTo(bankDtl.getAmtInLakh()) == 1) {
+				// sanOrdDtlViewDTO.setOrderAmt(grSanOrdDtl.getOrderAmt().subtract(bankDtl.getAmt()));
+				sanOrdDtlViewDTO.setOrderAmt(calGrOrderAmt.subtract(bankDtl.getAmt()));
 				sanOrdDtlViewDTO.setOrderAmtInLakh(grSanOrdDtl.getOrderAmtInLakh().subtract(bankDtl.getAmtInLakh()));
 			}
 		} else {
-			sanOrdDtlViewDTO.setOrderAmt(grSanOrdDtl.getOrderAmt());
+			// sanOrdDtlViewDTO.setOrderAmt(grSanOrdDtl.getOrderAmt());
+			sanOrdDtlViewDTO.setOrderAmt(calGrOrderAmt);
 			sanOrdDtlViewDTO.setOrderAmtInLakh(grSanOrdDtl.getOrderAmtInLakh());
 		}
+		if (sanOrdDtlViewDTO.getOrderAmt().compareTo(new BigDecimal(0)) == 0) {
+			sanOrdDtlViewDTO = null;
+			calGrOrderAmt = null;
+		} else {
+			sanOrdDtlViewDTO.setRid(grSanOrdDtl.getRid());
+			sanOrdDtlViewDTO.setOrderProgramName(grSanOrdDtl.getOrderProgramName());
+			sanOrdDtlViewDTO.setOrderDate(grSanOrdDtl.getOrderDate());
+			sanOrdDtlViewDTO.setOrderNumber(grSanOrdDtl.getOrderNumber());
+			sanOrdDtlViewDTO.setOrderCategory(grSanOrdDtl.getOrderCategory());
+			sanOrdDtlViewList.add(sanOrdDtlViewDTO);
+		}
+
 	}
 
 	@RequestMapping(value = "/addBank", method = RequestMethod.GET)
@@ -193,11 +204,12 @@ public class BankController extends AbstractCommonController {
 		System.out.println("======formMode===[" + formMode + "]");
 
 		/*
-		 * Get the all deleted rids of sanction order detail in form edit mode. which
-		 * user was deleted the rows When click on '-' button;
+		 * Get the all deleted rids of sanction order detail in form edit mode.
+		 * which user was deleted the rows When click on '-' button;
 		 */
 		String bankDtlRidsDeleted = request.getParameter("grSanOrdDtlRidsDeleted");
-		// System.out.println("======sanOrdDtlRidsDeleted===[" + sanOrdDtlRidsDeleted +
+		// System.out.println("======sanOrdDtlRidsDeleted===[" +
+		// sanOrdDtlRidsDeleted +
 		// "]");
 
 		if (StringUtils.equals("NEW", formMode)) {
@@ -227,7 +239,8 @@ public class BankController extends AbstractCommonController {
 				if (bankDetail.getBank() == null) {
 					bankDetail.setBank(bank);
 
-					// Don't comment the below line because if rid null then create new rid.
+					// Don't comment the below line because if rid null then
+					// create new rid.
 					bankDetail.getRid();
 				}
 				ShareTypeEnum curShareTypeEnum = null;
@@ -266,12 +279,15 @@ public class BankController extends AbstractCommonController {
 	}
 
 	/**
-	 * This method check the amount of current entered in the BankDetails. If this
-	 * amount is equal of GRSanctionDetail amount. Then mark as completed and update
-	 * column <code>'COMPLETED'</code> with value 'Y' of both. Otherwise no action.
+	 * This method check the amount of current entered in the BankDetails. If
+	 * this amount is equal of GRSanctionDetail amount. Then mark as completed
+	 * and update column <code>'COMPLETED'</code> with value 'Y' of both.
+	 * Otherwise no action.
 	 * 
-	 * @param bankDetail the Bank Detail entity 
-	 * @param curShareTypeEnum the given share type
+	 * @param bankDetail
+	 *            the Bank Detail entity
+	 * @param curShareTypeEnum
+	 *            the given share type
 	 * @param sanOrdDtlRidSet
 	 *            for the SanctionOrderDetail Rids
 	 */
@@ -283,14 +299,16 @@ public class BankController extends AbstractCommonController {
 			boolean isCompleted = false;
 			switch (curShareTypeEnum) {
 			case STATE:
-				if (bankDetail.getAmt().compareTo(grSanOrdDtlEntity.getOrderAmt()) == 0) {
+				//if (bankDetail.getAmt().compareTo(grSanOrdDtlEntity.getOrderAmt()) == 0) {
+				if (bankDetail.getAmtInLakh().compareTo(grSanOrdDtlEntity.getOrderAmtInLakh()) == 0) {
 					bankDetail.setCompleted(COMPLETED_YES);
 					grSanOrdDtlEntity.setCompleted(COMPLETED_YES);
 					isCompleted = true;
 				}
 				break;
 			case CENTRAL:
-				if (bankDetail.getAmt().compareTo(grSanOrdDtlEntity.getOrderAmt()) == 0) {
+				//if (bankDetail.getAmt().compareTo(grSanOrdDtlEntity.getOrderAmt()) == 0) {
+				if (bankDetail.getAmtInLakh().compareTo(grSanOrdDtlEntity.getOrderAmtInLakh()) == 0) {
 					bankDetail.setCompleted(COMPLETED_YES);
 					grSanOrdDtlEntity.setCompleted(COMPLETED_YES);
 					isCompleted = true;
@@ -327,16 +345,18 @@ public class BankController extends AbstractCommonController {
 					String completed = "" + grSanOrdDtlEntity.getCompleted();
 					switch (curShareTypeEnum) {
 					case STATE:
-						if (grSanOrdDtlEntity.getOrderAmt().compareTo(sanOrdDtlEntity.getOrderStateShareAmt()) == 0
-								&& StringUtils.equals(completed, Character.toString(COMPLETED_YES))) {
+						/*if (grSanOrdDtlEntity.getOrderAmt().compareTo(sanOrdDtlEntity.getOrderStateShareAmt()) == 0
+						&& StringUtils.equals(completed, Character.toString(COMPLETED_YES))) {*/
+						if (grSanOrdDtlEntity.getOrderAmtInLakh().compareTo(sanOrdDtlEntity.getOrderStateShareAmtInLakh()) == 0) {
 							sanOrdDtlEntity.setStateShareCompleted(COMPLETED_YES);
 							isCompleted = true;
 						}
 						break;
 					case CENTRAL:
-						if (grSanOrdDtlEntity.getOrderAmt().compareTo(sanOrdDtlEntity.getOrderAmt()) == 0
-								&& StringUtils.equals(completed, Character.toString(COMPLETED_YES))) {
-							sanOrdDtlEntity.setCompleted(COMPLETED_YES);
+						/*if (grSanOrdDtlEntity.getOrderAmt().compareTo(sanOrdDtlEntity.getOrderAmt()) == 0
+						&& StringUtils.equals(completed, Character.toString(COMPLETED_YES))) {*/
+							if (grSanOrdDtlEntity.getOrderAmtInLakh().compareTo(sanOrdDtlEntity.getOrderAmtInLakh()) == 0) {
+								sanOrdDtlEntity.setCompleted(COMPLETED_YES);
 							isCompleted = true;
 						}
 						break;
@@ -370,7 +390,7 @@ public class BankController extends AbstractCommonController {
 		BankEntity bank = bankBO.findByRid(bankRid);
 
 		bankBO.deleteBank(bank);
-		updateGROrder( bank );
+		updateGROrder(bank);
 		System.out.println("IN SAVE sanctionOrder[" + bank + "]");
 		redirectAttributes.addAttribute("css", "danger");
 		redirectAttributes.addAttribute("msg", "Data deleted Successfully!");
@@ -384,38 +404,41 @@ public class BankController extends AbstractCommonController {
 	 * column with <code>N</code> value of <code>GR_SAN_DTL</code> table.<br>
 	 * If current column value 'Y' otherwise nothing.
 	 * 
-	 * @param bank of current deleted.
+	 * @param bank
+	 *            of current deleted.
 	 */
 	public void updateGROrder(BankEntity bank) {
 		List<BankDetailEntity> bnkDtlList = bank.getBankDetails();
 		for (BankDetailEntity bankDetailEntity : bnkDtlList) {
 			GrSanctionOrderDetailEntity grSanOrdDtlEntity = grSanOrdBO
 					.findGrSanctionOrderDetailByRid(bankDetailEntity.getGrSanOrdDtlRid());
-			if( grSanOrdDtlEntity != null ) {
+			if (grSanOrdDtlEntity != null) {
 				if (StringUtils.equals(Character.toString(COMPLETED_YES),
 						Character.toString(grSanOrdDtlEntity.getCompleted()))) {
 					grSanOrdDtlEntity.setCompleted(COMPLETED_NO);
-					grSanOrdBO.saveOrUpdate( grSanOrdDtlEntity.getGrSanctionOrder() );
+					grSanOrdBO.saveOrUpdate(grSanOrdDtlEntity.getGrSanctionOrder());
 					updateSanOrderDtl(grSanOrdDtlEntity);
 				}
-			}	
+			}
 		}
 	}
-	
+
 	/**
-	 * This method updating the <code>COMPLETED </code> <br>
+	 * This method updating the <code>COMPLETED</code> <br>
 	 * column with <code>N</code> value of <code>SAN_DTL</code> table.<br>
 	 * If current column value 'Y' otherwise nothing.
 	 * 
-	 * @param grSanOrdDtlEntity of current update.
+	 * @param grSanOrdDtlEntity
+	 *            of current update.
 	 */
 	public void updateSanOrderDtl(GrSanctionOrderDetailEntity grSanOrdDtlEntity) {
-		SanctionOrderDetailEntity sanOrdDtlEntity = sanOrdBO.findSanctionOrderDetailByRid( grSanOrdDtlEntity.getSanOrdDtlRid() );
-		if( sanOrdDtlEntity != null ) {
+		SanctionOrderDetailEntity sanOrdDtlEntity = sanOrdBO
+				.findSanctionOrderDetailByRid(grSanOrdDtlEntity.getSanOrdDtlRid());
+		if (sanOrdDtlEntity != null) {
 			if (StringUtils.equals(Character.toString(COMPLETED_YES),
 					Character.toString(sanOrdDtlEntity.getCompleted()))) {
 				sanOrdDtlEntity.setCompleted(COMPLETED_NO);
-				sanOrdBO.saveOrUpdate( sanOrdDtlEntity.getSanctionOrder() );
+				sanOrdBO.saveOrUpdate(sanOrdDtlEntity.getSanctionOrder());
 			}
 		}
 	}
@@ -441,7 +464,8 @@ public class BankController extends AbstractCommonController {
 		String fullFilePath = context.getRealPath("") + File.separator + UPLOAD_DIRECTORY + File.separator + fileName;
 
 		// The below line for download the pdf file
-		// response.addHeader("Content-Disposition", "attachment;filename=report.pdf");
+		// response.addHeader("Content-Disposition",
+		// "attachment;filename=report.pdf");
 		response.setContentType("application/pdf");
 		response.setDateHeader("Expires", -1);
 

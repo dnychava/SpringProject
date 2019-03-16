@@ -126,7 +126,7 @@ public class SanctionOrderController extends AbstractCommonController {
 		System.out.println("======formMode===[" + formMode + "]");
 
 		/*
-		 * Get the all deleted rids of sanction order detail in form edit mode. which
+		 * Get the all deleted rids of sanction order detail form in edit mode. which
 		 * user was deleted the rows When click on '-' button;
 		 */
 		String sanOrdDtlRidsDeleted = request.getParameter("sanOrdDtlRidsDeleted");
@@ -402,11 +402,11 @@ public class SanctionOrderController extends AbstractCommonController {
 					
 					// calculating for state share amount
 					sanOrdDetail.setOrderStateShareAmt(sanOrdDetail.getOrderAmt()
-							.multiply(percentage).divide(divided, 2,RoundingMode.HALF_UP));
+							.multiply(percentage).divide(divided, 2, RoundingMode.HALF_UP));
 					
 					// calculating for state share amount in lakha
 					sanOrdDetail.setOrderStateShareAmtInLakh(
-							sanOrdDetail.getOrderStateShareAmt().divide(new BigDecimal(100000),4,RoundingMode.HALF_UP));
+							sanOrdDetail.getOrderStateShareAmt().divide(new BigDecimal(100000), 2, RoundingMode.HALF_UP));
 					System.out.println( " StateShareAmt["+sanOrdDetail.getOrderStateShareAmt()+"] StateShareAmtInLakh["+sanOrdDetail.getOrderStateShareAmtInLakh()+"]");
 					break;
 

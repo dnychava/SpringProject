@@ -18,19 +18,51 @@ public class ReportController extends AbstractCommonController {
 	@RequestMapping("/viewDelayDaysReportFilter")
 	public ModelAndView viewSanctionOrderFilter() {
 		ModelAndView model = new ModelAndView("viewDelayDaysReportFilter");
-		model.addObject("sinalcialYears", MasterData.getInstance().getFinalcialYearList());
+		//need to be remove the below commented code after the testing done
+		/*model.addObject("sinalcialYears", MasterData.getInstance().getFinalcialYearList());
 		model.addObject("programName", MasterData.getInstance().getProgramList());
 		model.addObject("categories", MasterData.getInstance().getCategoryList());
 		model.addObject("shareType", MasterData.getInstance().getShare());
+		model.addObject("dispDateFormatter", dispDateFormatter);
+		model.addObject("docFormatType", MasterData.getInstance().getDocFormatType());
+		model.addObject("fromDate", new Date());
+		model.addObject("toDate", new Date());*/
+		addMasterFields(model);
+
+		model.addObject("pendingOrdFilter", pendingOrdFilter);
+
+		return model;
+	}
+	
+	@RequestMapping("/pendingSummaryReportFilter")
+	public ModelAndView pendingSummaryReportFilter() {
+		ModelAndView model = new ModelAndView("pendingSummaryReportFilter");
+		//need to be remove the below commented code after the testing done
+		/*model.addObject("sinalcialYears", MasterData.getInstance().getFinalcialYearList());
+		model.addObject("programName", MasterData.getInstance().getProgramList());
+		model.addObject("categories", MasterData.getInstance().getCategoryList());
+		model.addObject("shareType", MasterData.getInstance().getShare());
+		model.addObject("dispDateFormatter", dispDateFormatter);
+		model.addObject("docFormatType", MasterData.getInstance().getDocFormatType());
+		model.addObject("fromDate", new Date());
+		model.addObject("toDate", new Date());*/
+		addMasterFields(model);
+		model.addObject("sinalcialYears", MasterData.getInstance().getFinalcialYearList(true));
+		model.addObject("pendingOrdFilter", pendingOrdFilter);
+
+		return model;
+	}
+	
+	private void addMasterFields(ModelAndView model){
+		
+		model.addObject("sinalcialYears", MasterData.getInstance().getFinalcialYearList());
+		model.addObject("programName", MasterData.getInstance().getProgramList());
+		model.addObject("categories", MasterData.getInstance().getCategoryList());
 		model.addObject("shareType", MasterData.getInstance().getShare());
 		model.addObject("dispDateFormatter", dispDateFormatter);
 		model.addObject("docFormatType", MasterData.getInstance().getDocFormatType());
 		model.addObject("fromDate", new Date());
 		model.addObject("toDate", new Date());
 		
-
-		model.addObject("pendingOrdFilter", pendingOrdFilter);
-
-		return model;
 	}
 }

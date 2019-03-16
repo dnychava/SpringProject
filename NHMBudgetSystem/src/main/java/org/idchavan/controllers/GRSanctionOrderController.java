@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,6 +82,8 @@ public class GRSanctionOrderController extends AbstractCommonController {
 
 	@Autowired
 	private OrderDetailFilterDTO sanOrdDtlFilter;
+	
+	private final BigDecimal ONE_LAKH = new BigDecimal(100000);
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -142,15 +146,15 @@ public class GRSanctionOrderController extends AbstractCommonController {
 			BankDetailEntity bankDtlEntity = bankBO.getBankDetailsUsingGroupByOfGrsanOrdDtlRid(grSanOrdDtlRid,
 					shareTypeEnum.getName());
 
-			SanctionOrderDetailViewDTO sanOrdDtlViewDTO = new SanctionOrderDetailViewDTO();
+			/*SanctionOrderDetailViewDTO sanOrdDtlViewDTO = new SanctionOrderDetailViewDTO();
 			sanOrdDtlViewDTO.setRid(sanOrdDtl.getRid());
 			sanOrdDtlViewDTO.setOrderProgramName(sanOrdDtl.getOrderProgramName());
 			sanOrdDtlViewDTO.setOrderDate(sanOrdDtl.getOrderDate());
 			sanOrdDtlViewDTO.setOrderNumber(sanOrdDtl.getOrderNumber());
 			sanOrdDtlViewDTO.setOrderCategory(sanOrdDtl.getOrderCategory());
-			sanOrdDtlViewDTO.setSharType(shareTypeEnum.getName());
-			compareSanOrdDtlToGrSanOrdDtl(sanOrdDtl, grSanOrdDtl, bankDtlEntity, sanOrdDtlViewDTO, shareTypeEnum);
-			sanOrdDtlViewList.add(sanOrdDtlViewDTO);
+			sanOrdDtlViewDTO.setSharType(shareTypeEnum.getName());*/
+			compareSanOrdDtlToGrSanOrdDtl(sanOrdDtl, grSanOrdDtl, bankDtlEntity, shareTypeEnum, sanOrdDtlViewList);
+			/*sanOrdDtlViewList.add(sanOrdDtlViewDTO);*/
 		}
 		model.addAttribute("sanOrdDtlViewList", sanOrdDtlViewList);
 		return "popupSanctionOrderDetails";
@@ -158,52 +162,80 @@ public class GRSanctionOrderController extends AbstractCommonController {
 
 	public void compareSanOrdDtlToGrSanOrdDtl(SanctionOrderDetailEntity sanOrdDtl,
 			GrSanctionOrderDetailEntity grSanOrdDtl, BankDetailEntity bankDtlEntity,
-			SanctionOrderDetailViewDTO sanOrdDtlViewDTO, ShareTypeEnum shareTypeEnum) {
+			ShareTypeEnum shareTypeEnum, 
+			List<SanctionOrderDetailViewDTO> sanOrdDtlViewList) {
+		SanctionOrderDetailViewDTO sanOrdDtlViewDTO = new SanctionOrderDetailViewDTO();
+		
 		switch (shareTypeEnum) {
 		case STATE:
-			if (bankDtlEntity != null && sanOrdDtl.getOrderStateShareAmt().compareTo(bankDtlEntity.getAmt()) == 1) {
-				sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderStateShareAmt().subtract(bankDtlEntity.getAmt()));
+			BigDecimal calStateShareAmt = sanOrdDtl.getOrderStateShareAmtInLakh().multiply(ONE_LAKH, MathContext.UNLIMITED);
+			//if (bankDtlEntity != null && sanOrdDtl.getOrderStateShareAmt().compareTo(bankDtlEntity.getAmt()) == 1) {
+			if (bankDtlEntity != null && sanOrdDtl.getOrderStateShareAmtInLakh().compareTo(bankDtlEntity.getAmtInLakh()) == 1) {
+				//sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderStateShareAmt().subtract(bankDtlEntity.getAmt()));
+				sanOrdDtlViewDTO.setOrderAmt(calStateShareAmt.subtract(bankDtlEntity.getAmt()));
 				sanOrdDtlViewDTO.setOrderAmtInLakh(
 						sanOrdDtl.getOrderStateShareAmtInLakh().subtract(bankDtlEntity.getAmtInLakh()));
-
+				
 			} else if (grSanOrdDtl != null) {
-				if (sanOrdDtl.getOrderStateShareAmt().compareTo(grSanOrdDtl.getOrderAmt()) == 0) {
+				//if (sanOrdDtl.getOrderStateShareAmt().compareTo(grSanOrdDtl.getOrderAmt()) == 0) {
+				if (sanOrdDtl.getOrderStateShareAmtInLakh().compareTo(grSanOrdDtl.getOrderAmtInLakh()) == 0) {
 					sanOrdDtlViewDTO.setRadioBtn(false);
-					sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderStateShareAmt());
+					//sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderStateShareAmt());
+					sanOrdDtlViewDTO.setOrderAmt(calStateShareAmt);
 					sanOrdDtlViewDTO.setOrderAmtInLakh(sanOrdDtl.getOrderStateShareAmtInLakh());
-				} else if (sanOrdDtl.getOrderStateShareAmt().compareTo(grSanOrdDtl.getOrderAmt()) == 1) {
-					sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderStateShareAmt().subtract(grSanOrdDtl.getOrderAmt()));
+				} else if (sanOrdDtl.getOrderStateShareAmtInLakh().compareTo(grSanOrdDtl.getOrderAmtInLakh()) == 1) {
+					//sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderStateShareAmt().subtract(grSanOrdDtl.getOrderAmt()));
+					sanOrdDtlViewDTO.setOrderAmt(calStateShareAmt.subtract(grSanOrdDtl.getOrderAmt()));
 					sanOrdDtlViewDTO.setOrderAmtInLakh(
 							sanOrdDtl.getOrderStateShareAmtInLakh().subtract(grSanOrdDtl.getOrderAmtInLakh()));
 				}
 			} else {
-				sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderStateShareAmt());
+				sanOrdDtlViewDTO.setOrderAmt(calStateShareAmt);
 				sanOrdDtlViewDTO.setOrderAmtInLakh(sanOrdDtl.getOrderStateShareAmtInLakh());
 			}
 			break;
 		case CENTRAL:
-			if (bankDtlEntity != null && sanOrdDtl.getOrderAmt().compareTo(bankDtlEntity.getAmt()) == 1 ){
-				sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderAmt().subtract(bankDtlEntity.getAmt()));
+			//Formula(centralAmt = sanOrdAmtInLakh * 100000)
+			BigDecimal calCentralShareAmt = sanOrdDtl.getOrderAmtInLakh().multiply(ONE_LAKH, MathContext.UNLIMITED);
+			//if (bankDtlEntity != null && sanOrdDtl.getOrderAmt().compareTo(bankDtlEntity.getAmt()) == 1 ){
+			if (bankDtlEntity != null && sanOrdDtl.getOrderAmtInLakh().compareTo(bankDtlEntity.getAmtInLakh()) == 1 ){
+				//sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderAmt().subtract(bankDtlEntity.getAmt()));
+				sanOrdDtlViewDTO.setOrderAmt(calCentralShareAmt.subtract(bankDtlEntity.getAmt()));
 				sanOrdDtlViewDTO
 						.setOrderAmtInLakh(sanOrdDtl.getOrderAmtInLakh().subtract(bankDtlEntity.getAmtInLakh()));
 			}else if (grSanOrdDtl != null) {
-				if (sanOrdDtl.getOrderAmt().compareTo(grSanOrdDtl.getOrderAmt()) == 0) {
+				//if (sanOrdDtl.getOrderAmt().compareTo(grSanOrdDtl.getOrderAmt()) == 0) {
+				if (sanOrdDtl.getOrderAmtInLakh().compareTo(grSanOrdDtl.getOrderAmtInLakh()) == 0) {
 					sanOrdDtlViewDTO.setRadioBtn(false);
-					sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderAmt());
+					//sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderAmt());
+					sanOrdDtlViewDTO.setOrderAmt(calCentralShareAmt);
 					sanOrdDtlViewDTO.setOrderAmtInLakh(sanOrdDtl.getOrderAmtInLakh());
-				} else if (sanOrdDtl.getOrderAmt().compareTo(grSanOrdDtl.getOrderAmt()) == 1) {
-					sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderAmt().subtract(grSanOrdDtl.getOrderAmt()));
+				} else if (sanOrdDtl.getOrderAmtInLakh().compareTo(grSanOrdDtl.getOrderAmtInLakh()) == 1) {
+					//sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderAmt().subtract(grSanOrdDtl.getOrderAmt()));
+					sanOrdDtlViewDTO.setOrderAmt(calCentralShareAmt.subtract(grSanOrdDtl.getOrderAmt()));
 					sanOrdDtlViewDTO
 							.setOrderAmtInLakh(sanOrdDtl.getOrderAmtInLakh().subtract(grSanOrdDtl.getOrderAmtInLakh()));
 				}
 			} else {
-				sanOrdDtlViewDTO.setOrderAmt(sanOrdDtl.getOrderAmt());
+				sanOrdDtlViewDTO.setOrderAmt(calCentralShareAmt);
 				sanOrdDtlViewDTO.setOrderAmtInLakh(sanOrdDtl.getOrderAmtInLakh());
 			}
 			break;
 		default:
 			System.out.println("=======NO SHARE TYPE FOUND==========");
 			break;
+		}
+		
+		if(sanOrdDtlViewDTO.getOrderAmt().compareTo(new BigDecimal(0))==0){
+			sanOrdDtlViewDTO = null;
+		}else{
+			sanOrdDtlViewDTO.setRid(sanOrdDtl.getRid());
+			sanOrdDtlViewDTO.setOrderProgramName(sanOrdDtl.getOrderProgramName());
+			sanOrdDtlViewDTO.setOrderDate(sanOrdDtl.getOrderDate());
+			sanOrdDtlViewDTO.setOrderNumber(sanOrdDtl.getOrderNumber());
+			sanOrdDtlViewDTO.setOrderCategory(sanOrdDtl.getOrderCategory());
+			sanOrdDtlViewDTO.setSharType(shareTypeEnum.getName());
+			sanOrdDtlViewList.add(sanOrdDtlViewDTO);
 		}
 	}
 

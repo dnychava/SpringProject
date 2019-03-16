@@ -71,12 +71,6 @@
        <put-attribute name="body" value="/WEB-INF/pages/addSanctionOrder.jsp" />  
    </definition>
       
-   <!-- Sanction Order Filter Page -->
-   <definition name="viewSanctionOrderFilter" extends="base-definition">  
-       <put-attribute name="title" value="Contact Us" />  
-       <put-attribute name="body" value="/WEB-INF/pages/viewSanctionOrderFilter.jsp" />  
-   </definition>
-   
    <!-- Sanction Order Report Page -->
    <definition name="viewSanctionReport" extends="base-definition">  
        <put-attribute name="title" value="Contact Us" />  
@@ -172,17 +166,30 @@
    					REPORT SECTION 
    ==================================================================================================================== 
    -->
+   
+   <!-- Sanction Order Filter Page -->
+   <definition name="viewSanctionOrderFilter" extends="base-definition">  
+       <put-attribute name="title" value="Contact Us" />  
+       <put-attribute name="body" value="/WEB-INF/pages/viewSanctionOrderFilter.jsp" />  
+   </definition>
+   
     <!-- Pending Report :: SECTION-START -->
    <definition name="pendingReportFilter" extends="base-definition">  
        <put-attribute name="title" value="Sanction" />  
        <put-attribute name="body" value="/WEB-INF/pages/pendingReportFilter.jsp" />  
    </definition>
-   
+
    <definition name="viewPendingReport" extends="base-definition">  
        <put-attribute name="title" value="Sanction" />  
        <put-attribute name="body" value="/WEB-INF/pages/viewPendingReport.jsp" />  
    </definition>
    <!-- Pending Report :: SECTION-END -->
+   
+   <!-- Pending Summary  Report :: SECTION-START -->
+   <definition name="pendingSummaryReportFilter" extends="base-definition">  
+       <put-attribute name="title" value="Pending Summary Report" />  
+       <put-attribute name="body" value="/WEB-INF/pages/pendingSummaryReportFilter.jsp" />  
+   </definition>
    
     <!-- Delay Days Report :: SECTION-START -->
    <definition name="viewDelayDaysReportFilter" extends="base-definition">  

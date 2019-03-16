@@ -64,6 +64,9 @@
 			  		<li><a href="${pageContext.request.contextPath}/pendingReportFilter">Pending</a></li>
               </sec:authorize>
               <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+			  		<li><a href="${pageContext.request.contextPath}/pendingSummaryReportFilter">Pending Summary</a></li>
+              </sec:authorize>
+              <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
 			  		<li><a href="${pageContext.request.contextPath}/viewDelayDaysReportFilter">Delay Days</a></li>
               </sec:authorize>
             </ul>

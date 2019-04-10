@@ -27,9 +27,9 @@
               <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
               	<li><a href="${pageContext.request.contextPath}/viewBudget">Budget</a></li>
               </sec:authorize>
-              <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+              <!--<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
               	<li><a href="${pageContext.request.contextPath}/viewDataUploadPage">Data Upload</a></li>
-              </sec:authorize>
+              </sec:authorize> -->
             </ul>
           </li>
           <li class="sub-menu">

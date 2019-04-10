@@ -4,7 +4,7 @@
 	<groupId>org.idchavan</groupId>
 	<artifactId>NHMBudgetSystem</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.7-Beta</version>
+	<version>0.0.9</version>
 	<name>NHMBudgetSystem Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>

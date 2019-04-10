@@ -108,7 +108,7 @@
               	<a class="text-muted" href="${pageContext.request.contextPath}/logout"><i class="icon_key_alt"></i>Log Out</a>
               </li>
               <li>
-              	<label class="text-muted">Version : 0.0.7</label>
+              	<label class="text-muted">Version : 0.0.8</label>
               </li>	
             </ul>
           </li>

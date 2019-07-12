@@ -191,11 +191,18 @@
        <put-attribute name="body" value="/WEB-INF/pages/pendingSummaryReportFilter.jsp" />  
    </definition>
    
-    <!-- Delay Days Report :: SECTION-START -->
+   <!-- Delay Days Report :: SECTION-START -->
    <definition name="viewDelayDaysReportFilter" extends="base-definition">  
        <put-attribute name="title" value="Sanction" />  
        <put-attribute name="body" value="/WEB-INF/pages/viewDelayDaysReportFilter.jsp" />  
    </definition>
    <!-- Delay Days Report :: SECTION-END -->
+   
+   <!-- Budget Report :: SECTION-START -->
+   <definition name="viewBudgetReportFilter" extends="base-definition">  
+       <put-attribute name="title" value="Budget Report" />  
+       <put-attribute name="body" value="/WEB-INF/pages/viewBudgetReportFilter.jsp" />  
+   </definition>
+   <!-- Budget Report :: SECTION-END -->
  
 </tiles-definitions>

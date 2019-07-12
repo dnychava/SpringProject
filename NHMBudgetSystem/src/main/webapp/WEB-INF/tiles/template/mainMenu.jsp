@@ -43,11 +43,11 @@
               	<li><a href="${pageContext.request.contextPath}/viewMainGroup">Main Group</a></li>
               </sec:authorize>
               <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-              	<li><a href="${pageContext.request.contextPath}/viewMstrPrgrmName">Budget</a></li>
+              	<li><a href="${pageContext.request.contextPath}/viewMstrPrgrmName">Program Name</a></li>
               </sec:authorize>
-              <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+              <%-- <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
               	<li><a href="${pageContext.request.contextPath}/fileUpload">Upload Data</a></li>
-              </sec:authorize>
+              </sec:authorize> --%>
             </ul>
           </li>
           <li class="sub-menu">
@@ -68,6 +68,9 @@
               </sec:authorize>
               <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
 			  		<li><a href="${pageContext.request.contextPath}/viewDelayDaysReportFilter">Delay Days</a></li>
+              </sec:authorize>
+              <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+			  		<li><a href="${pageContext.request.contextPath}/viewBudgetReportFilter">Budget</a></li>
               </sec:authorize>
             </ul>
           </li>

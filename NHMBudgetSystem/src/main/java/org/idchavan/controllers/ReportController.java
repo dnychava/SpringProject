@@ -53,6 +53,15 @@ public class ReportController extends AbstractCommonController {
 		return model;
 	}
 	
+	@RequestMapping("/viewBudgetReportFilter")
+	public ModelAndView viewBudgetReportFilter() {
+		ModelAndView model = new ModelAndView("viewBudgetReportFilter");
+		addMasterFields(model);
+		model.addObject("seasionType", MasterData.getInstance().getSeasonTypeList());
+		model.addObject("pendingOrdFilter", pendingOrdFilter);
+		return model;
+	}
+	
 	private void addMasterFields(ModelAndView model){
 		
 		model.addObject("sinalcialYears", MasterData.getInstance().getFinalcialYearList());

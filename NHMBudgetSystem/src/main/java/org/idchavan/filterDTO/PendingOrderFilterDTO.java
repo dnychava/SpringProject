@@ -21,6 +21,8 @@ public class PendingOrderFilterDTO {
 	
 	private String docFormatType;
 	
+	private String seasionType;
+	
 	public PendingOrderFilterDTO() {
 		
 	}
@@ -118,14 +120,27 @@ public class PendingOrderFilterDTO {
 		this.docFormatType = docFormatType;
 	}
 
+	/**
+	 * @return the seasionType
+	 */
+	public String getSeasionType() {
+		return seasionType;
+	}
+
+	/**
+	 * @param seasionType the seasionType to set
+	 */
+	public void setSeasionType(String seasionType) {
+		this.seasionType = seasionType;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "PendingOrderFilterDTO [year=" + year + ", fromDate=" + fromDate + ", toDate=" + toDate + ", shareType="
-				+ shareType + ", programs=" + programs + ", categories=" + categories + "]";
-	}
-
-	
+				+ shareType + ", programs=" + programs + ", categories=" + categories + ", docFormatType="
+				+ docFormatType + ", seasionType=" + seasionType + "]";
+	}	
 }

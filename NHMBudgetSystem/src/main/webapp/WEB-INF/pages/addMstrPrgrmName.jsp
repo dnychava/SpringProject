@@ -76,7 +76,7 @@
 					 	<div class="col-md-6">
 					 		<spring:bind path="inShort">
 						 		<div class="form-group ${status.error ? 'has-error' : ''}">
-						 			<label for="inShort" class="control-label">Main Group Name In Short <span class="required">*</span></label>
+						 			<label for="inShort" class="control-label">Program Name In Short <span class="required">*</span></label>
 						 			<form:input class="form-control" path="inShort" id="inShort"/>
 									<form:errors path="inShort" cssClass="help-block" element="span" />
 								</div>

@@ -26,7 +26,7 @@ public class MasterData {
 	
 	private String[] share = { "State", "Central"};
 	
-	private String[] seasonTypes = { "Main", "Mansoon", "Winter", "Summer", "RE"};
+	private String[] seasonTypes = { "Main", "Mansoon", "Winter", "Rewise Estimate", "Resource Envelope"};
 	
 	private Map<String,String> docFormatTye = new LinkedHashMap<String, String>();
 	

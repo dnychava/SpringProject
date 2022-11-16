@@ -22,7 +22,7 @@
 		<joda-time.version>2.3</joda-time.version>
 		<apachetiles.version>3.0.5</apachetiles.version>
 		<springsecurity.version>4.0.1.RELEASE</springsecurity.version>
-		<jackson.version>2.7.0</jackson.version>
+		<jackson.version>2.12.7.1</jackson.version>
 		<apache.poi.version>3.10.Final</apache.poi.version>
 	</properties>
 	<dependencies>
